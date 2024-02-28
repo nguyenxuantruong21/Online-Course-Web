@@ -1,8 +1,13 @@
-import useRouteElement from './useRouteElement'
+import DashBoardLayout from './layouts/DashBoard/DashBoardLayout'
+import useRouteElement from './routers/useRouteElement'
 
 function App() {
-  const routeElements = useRouteElement()
-  return <div>{routeElements}</div>
+  const routeElement = useRouteElement()
+  return (
+    <div>
+      <DashBoardLayout> {routeElement}</DashBoardLayout>
+    </div>
+  )
 }
 
 export default App
