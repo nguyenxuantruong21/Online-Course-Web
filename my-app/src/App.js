@@ -1,11 +1,10 @@
-import DashBoardLayout from './layouts/DashBoard/DashBoardLayout'
-import useRouteElement from './routers/useRouteElement'
+import { Routes } from 'react-router-dom'
+import { publicRoutes } from './routers/PublicRoute'
 
 function App() {
-  const routeElement = useRouteElement()
   return (
     <div>
-      <DashBoardLayout> {routeElement}</DashBoardLayout>
+      <Routes>{publicRoutes}</Routes>
     </div>
   )
 }

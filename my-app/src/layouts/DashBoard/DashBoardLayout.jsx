@@ -1,17 +1,21 @@
+import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import SideBar from '../../components/SideBar/SideBar'
+import { Outlet } from 'react-router-dom'
 
-export default function DashBoardLayout(props) {
-  const { children } = props
+export default function DashBoardLayout() {
   return (
     <div className=''>
       <Header />
-      <div className='grid grid-flow-row grid-cols-12'>
+      <div className='grid grid-flow-row grid-cols-12 '>
         <aside className='col-span-2'>
           <SideBar />
         </aside>
-        <main className='col-span-10 p-2 bg-gray-400'>{children}</main>
+        <main className='col-span-10 p-2 bg-gray-400'>
+          <Outlet />
+        </main>
       </div>
+      <Footer />
     </div>
   )
 }

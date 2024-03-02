@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 
 export default function SideBar() {
   return (
-    <div className='flex pt-2 bg-gray-800 h-screen cursor-pointer'>
+    <div className='flex pt-2 bg-gray-800  cursor-pointer h-[calc(100vh-100px-15px)] '>
       <div className='container'>
         {/* auth */}
         <div className='flex items-center justify-star px-4'>
@@ -31,7 +31,7 @@ export default function SideBar() {
             <div className='py-2'>
               <link class='fa-solid fa-gauge text-white'></link>
             </div>
-            <div className='py-2 px-3'>DashBoard</div>
+            <div className='py-2 px-3'>Trang chủ</div>
           </NavLink>
           <NavLink
             to='/mail'
@@ -40,7 +40,7 @@ export default function SideBar() {
             <div className='py-2'>
               <link class='fa-solid fa-envelope text-white'></link>
             </div>
-            <div className='py-2 px-3'>Mail</div>
+            <div className='py-2 px-3'>Thông báo</div>
           </NavLink>
           <NavLink
             to='/student'
@@ -49,7 +49,7 @@ export default function SideBar() {
             <div className='py-2'>
               <link class='fa-solid fa-person text-white'></link>
             </div>
-            <div className='py-2 px-3'>Student</div>
+            <div className='py-2 px-3'>Học sinh</div>
           </NavLink>
           <NavLink
             to='/course'
@@ -58,7 +58,7 @@ export default function SideBar() {
             <div className='py-2'>
               <link class='fa-solid fa-book  text-white'></link>
             </div>
-            <div className='py-2 px-3'>Course</div>
+            <div className='py-2 px-3'>Khoá học</div>
           </NavLink>
           <NavLink
             to='/setting'
@@ -67,7 +67,7 @@ export default function SideBar() {
             <div className='py-2'>
               <link class='fa-solid fa-gear  text-white'></link>
             </div>
-            <div className='py-2 px-3'>Setting</div>
+            <div className='py-2 px-3'>Cài đặt</div>
           </NavLink>
           <NavLink
             to='/account'
@@ -76,7 +76,16 @@ export default function SideBar() {
             <div className='py-2'>
               <Link class='fa-solid fa-user text-white'></Link>
             </div>
-            <div className='py-2 px-3'>Account</div>
+            <div className='py-2 px-3'>Tài khoản</div>
+          </NavLink>
+          <NavLink
+            to='/login'
+            className='mt-2 mx-2 flex justify-start pl-2 text-center  hover:bg-gray-600 hover:rounded-md'
+          >
+            <div className='py-2'>
+              <link class='fa-solid fa-right-from-bracket'></link>
+            </div>
+            <div className='py-2 px-3'>Đăng xuất</div>
           </NavLink>
         </div>
       </div>

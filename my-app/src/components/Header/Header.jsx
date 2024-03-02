@@ -3,12 +3,12 @@ import { NavLink } from 'react-router-dom'
 
 export default function Header() {
   return (
-    <header className='bg-gray-800 px-4 py-4 h-20'>
+    <header className='bg-gray-800 px-4 py-4 h-15'>
       <div className='container'>
         <div className='grid grid-cols-12 cursor-pointer'>
           {/* Logo */}
           <div className='text-4xl col-span-3 '>
-            <span className='text-gray-300'>Dev Love</span>
+            <span className='text-gray-300'>Unicode</span>
           </div>
           {/* search  */}
           <div className='col-span-5 flex items-center justify-center'>
