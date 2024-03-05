@@ -79,7 +79,7 @@ export default function SideBar() {
             <div className='py-2 px-3'>Tài khoản</div>
           </NavLink>
           <NavLink
-            to='/login'
+            to='/auth/login'
             className='mt-2 mx-2 flex justify-start pl-2 text-center  hover:bg-gray-600 hover:rounded-md'
           >
             <div className='py-2'>

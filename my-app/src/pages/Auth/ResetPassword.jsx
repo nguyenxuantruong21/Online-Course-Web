@@ -1,22 +1,29 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 
-export default function Login() {
+export default function ResetPassword() {
   return (
-    <div className='bg-gray-200 p-8 rounded shadow-md w-[500px] h-[450px]'>
-      <h2 className='text-3xl font-semibold mb-6 text-center text-gray-600'>Login</h2>
+    <div className='bg-gray-200 p-8 rounded shadow-md w-[500px] h-[550px]'>
+      <h2 className='text-3xl font-semibold mb-6 text-center text-gray-600'>Reset Password</h2>
       <form>
         <div className='mb-4'>
           <label htmlFor='email' className='block text-sm font-medium text-gray-700'>
             Email
           </label>
           <div className='bg-gray-300 px-5 py-4 rounded-md w-full mt-2'>
-            <input type='email' placeholder='email' className=' bg-gray-300 outline-none w-full' />
+            <input type='email' placeholder='email' className='w-full  bg-gray-300 outline-none' />
           </div>
         </div>
         <div className='mb-4'>
-          <label htmlFor='password' className='block text-sm font-medium text-gray-700 w-full'>
+          <label htmlFor='password' className='block text-sm font-medium text-gray-700'>
             Password
+          </label>
+          <div className='bg-gray-300 px-5 py-4 rounded-md w-full mt-2'>
+            <input type='password' placeholder='password' className='w-full  bg-gray-300 outline-none' />
+          </div>
+        </div>
+        <div className='mb-4'>
+          <label htmlFor='password' className='block text-sm font-medium text-gray-700'>
+            Comfirm Password
           </label>
           <div className='bg-gray-300 px-5 py-4 rounded-md w-full mt-2'>
             <input type='password' placeholder='password' className='w-full  bg-gray-300 outline-none' />
@@ -33,11 +40,6 @@ export default function Login() {
             <label htmlFor='remember-me' className='ml-2 block text-sm text-gray-900'>
               Remember me
             </label>
-          </div>
-          <div className='text-sm'>
-            <NavLink to='/auth/forgot-password' className='font-medium text-blue-600 hover:text-blue-500'>
-              Forgot your password?
-            </NavLink>
           </div>
         </div>
         <div className='mt-8'>

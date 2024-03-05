@@ -1,6 +1,5 @@
 import { Route } from 'react-router-dom'
 import DashboardLayout from '../layouts/DashBoard'
-import LoginLayout from '../layouts/Login'
 import Student from '../pages/Students/Student'
 import AddStudent from '../pages/Students/AddStudent'
 import Mails from '../pages/Mails'
@@ -8,7 +7,10 @@ import Courses from '../pages/Courses'
 import Account from '../pages/Account'
 import AddCourse from '../pages/Courses/AddCourse/AddCourse'
 import Home from '../pages/Home/Home'
+import AuthLayout from '../layouts/Auth'
 import Login from '../pages/Auth/Login'
+import ResetPassword from '../pages/Auth/ResetPassword'
+import ForgotPassword from '../pages/Auth/ForgotPassword'
 
 export const publicRoutes = (
   <>
@@ -21,8 +23,10 @@ export const publicRoutes = (
       <Route path='/course/add' element={<AddCourse />} />
       <Route path='/account' element={<Account />} />
     </Route>
-    <Route path='/auth' element={<LoginLayout />}>
+    <Route path='/auth' element={<AuthLayout />}>
       <Route path='login' element={<Login />} />
+      <Route path='forgot-password' element={<ForgotPassword />} />
+      <Route path='reset-password' element={<ResetPassword />} />
     </Route>
   </>
 )
