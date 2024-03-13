@@ -1,5 +1,6 @@
 import React from 'react'
-import InputFile from '../../../components/InputFile/InputFile'
+import MarkdownEditor from 'react-markdown-editor-lite'
+import 'react-markdown-editor-lite/lib/index.css'
 
 export default function AddCourse() {
   return (
@@ -9,25 +10,25 @@ export default function AddCourse() {
           <div className='flex my-1'>
             <div className='w-40'>Tên khoá học</div>
             <div className='bg-gray-300 px-5 py-2 rounded-md '>
-              <InputFile />
+              <MarkdownEditor style={{ height: '150px', width: '900px' }} />
             </div>
           </div>
           <div className='flex my-1'>
             <div className='w-40'>Mô tả ngắn</div>
             <div className='bg-gray-300 px-5 py-2 rounded-md  '>
-              <InputFile />
+              <MarkdownEditor style={{ height: '150px', width: '900px' }} />
             </div>
           </div>
           <div className='flex my-1'>
             <div className='w-40'>Link ảnh</div>
             <div className='bg-gray-300 px-5 py-2 rounded-md '>
-              <InputFile />
+              <MarkdownEditor style={{ height: '150px', width: '900px' }} />
             </div>
           </div>
           <div className='flex my-1'>
             <div className='w-40'>Mô tả chi tiết</div>
             <div className='bg-gray-300 px-5 py-2 rounded-md'>
-              <InputFile />
+              <MarkdownEditor style={{ height: '150px', width: '900px' }} />
             </div>
           </div>
           <div className='flex'>

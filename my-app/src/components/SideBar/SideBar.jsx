@@ -1,7 +1,25 @@
-import React from 'react'
+import { useMutation } from '@tanstack/react-query'
+import React, { useContext } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import authApi from '../../apis/auth.api'
+import { AppContext } from '../../contexts/app.context'
+import { clearLS } from '../../utils/auth'
 
 export default function SideBar() {
+  const { setIsAuthenticated } = useContext(AppContext)
+
+  const logoutMutation = useMutation({
+    mutationFn: authApi.logout,
+    onSuccess: (data) => {
+      setIsAuthenticated(false)
+    }
+  })
+
+  const handleLogout = () => {
+    logoutMutation.mutate()
+    clearLS()
+  }
+
   return (
     <div className='flex pt-2 bg-gray-800  cursor-pointer h-[calc(100vh-100px-15px)] '>
       <div className='container'>
@@ -61,6 +79,15 @@ export default function SideBar() {
             <div className='py-2 px-3'>Khoá học</div>
           </NavLink>
           <NavLink
+            to='/category'
+            className='mt-2 mx-2 flex justify-start pl-2 text-center  hover:bg-gray-600 hover:rounded-md'
+          >
+            <div className='py-2'>
+              <Link class='fa-solid fa-layer-group'></Link>
+            </div>
+            <div className='py-2 px-3'>Danh muc</div>
+          </NavLink>
+          <NavLink
             to='/setting'
             className='mt-2 mx-2 flex justify-start pl-2 text-center  hover:bg-gray-600 hover:rounded-md'
           >
@@ -85,7 +112,9 @@ export default function SideBar() {
             <div className='py-2'>
               <link class='fa-solid fa-right-from-bracket'></link>
             </div>
-            <div className='py-2 px-3'>Đăng xuất</div>
+            <div className='py-2 px-3' onClick={handleLogout}>
+              Đăng xuất
+            </div>
           </NavLink>
         </div>
       </div>

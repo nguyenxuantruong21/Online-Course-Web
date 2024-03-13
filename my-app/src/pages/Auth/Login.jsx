@@ -1,17 +1,50 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { useMutation } from '@tanstack/react-query'
+import { NavLink, useNavigate } from 'react-router-dom'
+import authApi from '../../apis/auth.api'
+import { setAccessTokenToLS, setRefreshTokenToLS } from '../../utils/auth'
+import { AppContext } from '../../contexts/app.context'
+
+const loginForm = {
+  email: '',
+  password: ''
+}
 
 export default function Login() {
+  const { setIsAuthenticated } = useContext(AppContext)
+  const [formState, setFormState] = useState(loginForm)
+  const { mutate } = useMutation({
+    mutationFn: (body) => authApi.login(body)
+  })
+  const navigate = useNavigate()
+  const onSubmit = (event) => {
+    event.preventDefault()
+    mutate(formState, {
+      onSuccess: (data) => {
+        setIsAuthenticated(true)
+        setAccessTokenToLS(data.data.metadata.tokens.access_token)
+        setRefreshTokenToLS(data.data.metadata.tokens.refresh_token)
+        navigate('/')
+      }
+    })
+  }
+
   return (
     <div className='bg-gray-200 p-8 rounded shadow-md w-[500px] h-[450px]'>
       <h2 className='text-3xl font-semibold mb-6 text-center text-gray-600'>Login</h2>
-      <form>
+      <form onSubmit={onSubmit}>
         <div className='mb-4'>
           <label htmlFor='email' className='block text-sm font-medium text-gray-700'>
             Email
           </label>
           <div className='bg-gray-300 px-5 py-4 rounded-md w-full mt-2'>
-            <input type='email' placeholder='email' className=' bg-gray-300 outline-none w-full' />
+            <input
+              type='email'
+              placeholder='email'
+              className=' bg-gray-300 outline-none w-full'
+              // value={loginForm.email}s
+              onChange={(event) => setFormState((prev) => ({ ...prev, email: event.target.value }))}
+            />
           </div>
         </div>
         <div className='mb-4'>
@@ -19,7 +52,13 @@ export default function Login() {
             Password
           </label>
           <div className='bg-gray-300 px-5 py-4 rounded-md w-full mt-2'>
-            <input type='password' placeholder='password' className='w-full  bg-gray-300 outline-none' />
+            <input
+              type='password'
+              placeholder='password'
+              className='w-full  bg-gray-300 outline-none'
+              // value={loginForm.password}
+              onChange={(event) => setFormState((prev) => ({ ...prev, password: event.target.value }))}
+            />
           </div>
         </div>
         <div className='flex items-center justify-between'>

@@ -11,6 +11,8 @@ import AuthLayout from '../layouts/Auth'
 import Login from '../pages/Auth/Login'
 import ResetPassword from '../pages/Auth/ResetPassword'
 import ForgotPassword from '../pages/Auth/ForgotPassword'
+import Category from '../pages/Category/Category'
+import AddCategory from '../pages/Category/AddCategory/AddCategory'
 
 export const publicRoutes = (
   <>
@@ -22,6 +24,9 @@ export const publicRoutes = (
       <Route path='/course' element={<Courses />} />
       <Route path='/course/add' element={<AddCourse />} />
       <Route path='/account' element={<Account />} />
+      <Route path='/category' element={<Category />} />
+      <Route path='/category/add' element={<AddCategory />} />
+      <Route path='/category/update/:id' element={<AddCategory />} />
     </Route>
     <Route path='/auth' element={<AuthLayout />}>
       <Route path='login' element={<Login />} />
