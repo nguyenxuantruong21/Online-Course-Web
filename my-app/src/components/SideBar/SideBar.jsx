@@ -85,7 +85,7 @@ export default function SideBar() {
             <div className='py-2'>
               <Link class='fa-solid fa-layer-group'></Link>
             </div>
-            <div className='py-2 px-3'>Danh muc</div>
+            <div className='py-2 px-3'>Danh Mục</div>
           </NavLink>
           <NavLink
             to='/setting'

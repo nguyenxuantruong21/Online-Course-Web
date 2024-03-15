@@ -9,10 +9,10 @@ const categoryApi = {
   deleteCategory(id) {
     return http.delete(`/category/delete/${id}`)
   },
-  updateCategory(id) {
-    return http.patch(`/category/update/${id}`)
+  updateCategory(id, body) {
+    return http.patch(`/category/update/${id}`, body)
   },
-  getCategoryById(id) {
+  getCategoryDetail(id) {
     return http.get(`/category/${id}`)
   }
 }

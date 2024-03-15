@@ -23,6 +23,7 @@ export const publicRoutes = (
       <Route path='/mail' element={<Mails />} />
       <Route path='/course' element={<Courses />} />
       <Route path='/course/add' element={<AddCourse />} />
+      <Route path='/course/update/:id' element={<AddCourse />} />
       <Route path='/account' element={<Account />} />
       <Route path='/category' element={<Category />} />
       <Route path='/category/add' element={<AddCategory />} />

@@ -5,6 +5,9 @@ const authApi = {
   },
   logout() {
     return http.post(`/auth/logout`)
+  },
+  getme() {
+    return http.get(`/auth/get-me`)
   }
 }
 

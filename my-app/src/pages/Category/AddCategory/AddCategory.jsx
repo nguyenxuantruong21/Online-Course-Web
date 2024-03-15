@@ -1,55 +1,88 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MarkdownEditor from 'react-markdown-editor-lite'
 import 'react-markdown-editor-lite/lib/index.css'
 import categoryApi from '../../../apis/category.api'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useParams } from 'react-router-dom'
+import lodash from 'lodash'
 
-const categoryInitial = {
+const initialState = {
   name: '',
   status: '',
   parent_id: ''
 }
 
 export default function AddCategory() {
-  const [category, setCategory] = useState(categoryInitial)
+  const [category, setCategory] = useState(initialState)
+  const [currentCategory, setCurrentCategory] = useState(initialState)
 
   const { id } = useParams()
 
   // add category
-  const { mutate } = useMutation({
+  const { mutate: mutateAddCategory } = useMutation({
     mutationFn: (body) => categoryApi.createdCategory(body)
   })
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    if (category.parent_id === '') {
-      category.parent_id = 0
+  // update category
+  let queryConfig = {} // Khai báo một object để lưu trữ cấu hình của useQuery
+  if (id) {
+    queryConfig = {
+      queryKey: ['category'],
+      queryFn: () => categoryApi.getCategoryDetail(id)
     }
-    mutate(category, {
-      onSuccess: (data) => {
-        setCategory(categoryInitial)
-        toast.success(data.data.message, {
-          autoClose: 1000
-        })
-      },
-      onError: (error) => {
-        toast.error(error.message, {
-          autoClose: 1000
-        })
-      }
-    })
   }
+  const { data } = useQuery(queryConfig)
 
-  // edit category
-  const { data } = useQuery({
-    queryKey: ['category'],
-    queryFn: () => categoryApi.getCategoryById(id)
+  const { mutate: mutateUpdateCategory } = useMutation({
+    mutationFn: (body) => categoryApi.updateCategory(id, body)
   })
 
-  const currentCategory = data?.data.metadata
+  useEffect(() => {
+    if (data) {
+      const categoryDetail = lodash.pick(data?.data.metadata, ['name'])
+      setCurrentCategory(categoryDetail)
+    }
+  }, [data])
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    if (currentCategory) {
+      // update
+      mutateUpdateCategory(currentCategory, {
+        onSuccess: (data) => {
+          toast.success(data.data.message, {
+            autoClose: 1000
+          })
+          setCurrentCategory(null)
+        },
+        onError: (error) => {
+          toast.error(error.message, {
+            autoClose: 1000
+          })
+        }
+      })
+    } else {
+      // edit
+      if (category.parent_id === '') {
+        category.parent_id = 0
+      }
+      mutateAddCategory(category, {
+        onSuccess: (data) => {
+          setCategory(initialState)
+          toast.success(data.data.message, {
+            autoClose: 1000
+          })
+        },
+        onError: (error) => {
+          toast.error(error.message, {
+            autoClose: 1000
+          })
+        }
+      })
+    }
+  }
 
   return (
     <div className=''>
@@ -60,9 +93,15 @@ export default function AddCategory() {
             <div className='bg-gray-300 px-5 py-2 rounded-md '>
               <MarkdownEditor
                 style={{ height: '150px', width: '900px' }}
-                onChange={(event) => {
-                  setCategory((prev) => ({ ...prev, name: event.text }))
-                }}
+                onChange={
+                  currentCategory && currentCategory
+                    ? (event) => {
+                        setCurrentCategory((prev) => ({ ...prev, name: event.text }))
+                      }
+                    : (event) => {
+                        setCategory((prev) => ({ ...prev, name: event.text }))
+                      }
+                }
                 value={currentCategory && currentCategory ? currentCategory.name : category.name}
                 readOnly={false}
               />
@@ -71,9 +110,15 @@ export default function AddCategory() {
             <div className='bg-gray-300 px-5 py-2 rounded-md '>
               <MarkdownEditor
                 style={{ height: '150px', width: '900px' }}
-                onChange={(event) => {
-                  setCategory((prev) => ({ ...prev, parent_id: event.text }))
-                }}
+                onChange={
+                  currentCategory && currentCategory
+                    ? (event) => {
+                        setCurrentCategory((prev) => ({ ...prev, parent_id: event.text }))
+                      }
+                    : (event) => {
+                        setCategory((prev) => ({ ...prev, parent_id: event.text }))
+                      }
+                }
                 value={currentCategory && currentCategory ? currentCategory.parent_id : category.parent_id}
                 readOnly={false}
               />

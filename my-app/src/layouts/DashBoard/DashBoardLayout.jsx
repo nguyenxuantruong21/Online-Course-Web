@@ -5,10 +5,10 @@ import { Outlet } from 'react-router-dom'
 
 export default function DashBoardLayout() {
   return (
-    <div className=''>
+    <div className='h-screen over overflow-y-auto'>
       <Header />
       <div className='grid grid-flow-row grid-cols-12 '>
-        <aside className='col-span-2'>
+        <aside className='col-span-2 '>
           <SideBar />
         </aside>
         <main className='col-span-10 p-2 bg-gray-400'>
